@@ -1,0 +1,32 @@
+app:
+  name: "web_app"
+  mode: "debug"
+  port: 8080
+  version: "v0.0.0"
+log:
+  # 具体看 zap doc
+  output: "cmd" # file or cmd
+  level: "debug"
+  filename: "router.log"
+  max_size: 500
+  max_age: 30
+  max_backups: 7
+mysql:
+  dsn: "root:123456@tcp(127.0.0.1:3306)/demo?charset=utf8mb4"
+  # 最大连接数，即连接池大小
+  max_open_conn: 100
+  # 最大空闲连接数
+  max_idle_conns: 10
+redis:
+  # host:port address.
+  address: "127.0.0.1:6379"
+  password: ""
+  # Database to be selected after connecting to the server.
+  db: 0
+  # Maximum number of socket connections.
+  # Default is 10 connections per every available CPU as reported by runtime.GOMAXPROCS.
+  # 连接池大小，即最大连接数
+  pool_size: 100
+  # Maximum number of idle connections.
+  # 最大空闲连接数
+  min_idle_conns: 10
