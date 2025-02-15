@@ -4,6 +4,6 @@ type ExampleReq struct {
 	Name string `json:"name" binding:"required"`
 }
 
-type ExampleResp struct {
+type ExampleRespData struct {
 	Name string `json:"name" binding:"required"`
 }

@@ -9,6 +9,12 @@ import (
 	_ "web-app/docs"
 )
 
+// Setup title 和 version，不然不符合 swagger 标准，不能导入 postman
+// swag init -g ./router/router.go 指定搜索该文件
+// @title           app API
+// @version         0.0.0
+// @host 127.0.0.1:8080
+// @BasePath /api/dev
 func Setup(mode string) *gin.Engine {
 	switch mode {
 	case gin.ReleaseMode:
@@ -43,4 +49,3 @@ func registerSwagger(group *gin.RouterGroup) {
 func registerExample(group *gin.RouterGroup) {
 	group.POST("/example", controller.ExampleHandler)
 }
-

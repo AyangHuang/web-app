@@ -7,12 +7,12 @@ log:
   # 具体看 zap doc
   output: "cmd" # file or cmd
   level: "debug"
-  filename: "router.log"
+  filename: "app.log"
   max_size: 500
   max_age: 30
   max_backups: 7
 mysql:
-  dsn: "root:123456@tcp(127.0.0.1:3306)/demo?charset=utf8mb4"
+  dsn: "root:123456@tcp(127.0.0.1:3306)/demo?charset=utf8mb4&parseTime=True&loc=Local"
   # 最大连接数，即连接池大小
   max_open_conn: 100
   # 最大空闲连接数
