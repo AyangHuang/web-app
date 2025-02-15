@@ -1,8 +1,9 @@
 package controller
 
 import (
+	"aichat/model/vo"
+
 	"github.com/gin-gonic/gin"
-	"web-app/model/vo"
 )
 
 // ExampleHandler 用户登录
@@ -13,7 +14,7 @@ import (
 // @Produce      json
 // @Param        user body vo.ExampleReq  true  "请求 body 中的数据"
 // @Success      200  {object}  ResponseData{Data=vo.ExampleResp}
-// @Router       /api/v1/example [post]
+// @Router       /example [post]
 func ExampleHandler(c *gin.Context) {
 	var req vo.ExampleReq
 	// 参数校验
@@ -22,7 +23,7 @@ func ExampleHandler(c *gin.Context) {
 		ResponseError(c, CodeInvalidParam)
 	}
 
-	var resp = vo.ExampleRespData{
+	var resp = vo.ExampleResp{
 		Name: req.Name,
 	}
 

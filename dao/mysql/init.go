@@ -2,9 +2,11 @@ package mysql
 
 import (
 	"fmt"
+
+	"aichat/common/config"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"web-app/common/config"
 )
 
 var db *gorm.DB
@@ -21,5 +23,4 @@ func Init(conf *config.MySQLConfig) {
 	}
 	_db.SetMaxOpenConns(conf.MaxOpenConns) //设置数据库连接池最大连接数
 	_db.SetMaxIdleConns(conf.MaxIdleConns) //连接池最大允许的空闲连接数
-	db.Save().Error
 }

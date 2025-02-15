@@ -2,18 +2,21 @@ package main
 
 import (
 	"context"
-	"github.com/gin-gonic/gin"
-	"go.uber.org/zap"
+	"errors"
+	"fmt"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
-	"web-app/common/config"
-	"web-app/common/logger"
-	"web-app/dao/mysql"
-	"web-app/dao/redis"
-	"web-app/router"
+
+	"aichat/common/config"
+	"aichat/common/logger"
+	"aichat/dao/mysql"
+	"aichat/dao/redis"
+	"aichat/router"
+
+	"go.uber.org/zap"
 )
 
 func main() {
@@ -29,15 +32,15 @@ func main() {
 	defer redis.Close()
 
 	// 4. 注册路由
-	e := router.Setup(gin.DebugMode)
+	ginEngine := router.Setup(config.Conf.AppConfig.Mode, config.Conf.AppConfig.BaseURL)
 
 	// 5. 启动服务和优雅关机
 	srv := &http.Server{
-		Addr:    ":8080",
-		Handler: e,
+		Addr:    fmt.Sprintf("%s:%d", config.Conf.AppConfig.Address, config.Conf.AppConfig.Port),
+		Handler: ginEngine,
 	}
 	go func() {
-		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		if err := srv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 			panic(err)
 		}
 	}()

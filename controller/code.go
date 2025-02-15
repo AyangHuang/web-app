@@ -3,14 +3,13 @@ package controller
 type ResCode int32
 
 const (
-	CodeSuccess ResCode = 1000 + iota
-	CodeServerBusy
+	CodeSuccess    ResCode = 0
+	CodeServerBusy ResCode = 4999 + iota
 	CodeInvalidParam
 )
 
-var codeMsgMap = map[ResCode]string {
-	CodeSuccess: "success",
-	// 一般不暴露服务器内部错误，对外统一暴露“服务繁忙”
+var codeMsgMap = map[ResCode]string{
+	CodeSuccess:      "success",
 	CodeServerBusy:   "服务繁忙",
 	CodeInvalidParam: "请求参数错误",
 }

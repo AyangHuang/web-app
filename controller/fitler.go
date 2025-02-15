@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func CrosHandler() gin.HandlerFunc {
+func CorsHandler() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		method := context.Request.Method
 		context.Writer.Header().Set("Access-Control-Allow-Origin", "*")

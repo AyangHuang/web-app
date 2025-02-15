@@ -1,10 +1,9 @@
-module web-app
+module aichat
 
 go 1.19
 
 require (
 	github.com/gin-gonic/gin v1.9.0
-	github.com/go-sql-driver/mysql v1.7.0
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/redis/go-redis/v9 v9.0.3
 	github.com/spf13/viper v1.15.0
@@ -33,6 +32,7 @@ require (
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.11.2 // indirect
+	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/goccy/go-json v0.10.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect

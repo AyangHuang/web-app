@@ -2,10 +2,6 @@ package logger
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/natefinch/lumberjack"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 	"net"
 	"net/http"
 	"net/http/httputil"
@@ -13,11 +9,17 @@ import (
 	"runtime/debug"
 	"strings"
 	"time"
-	"web-app/common/config"
+
+	"aichat/common/config"
+
+	"github.com/gin-gonic/gin"
+	"github.com/natefinch/lumberjack"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 // Init 初始化日志库
-func Init(cfg *config.LogConfig)  {
+func Init(cfg *config.LogConfig) {
 	var writeSyncer zapcore.WriteSyncer
 
 	switch cfg.Output {
@@ -141,4 +143,3 @@ func GinRecovery(stack bool) gin.HandlerFunc {
 		c.Next()
 	}
 }
-

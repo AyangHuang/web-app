@@ -1,21 +1,23 @@
 package router
 
 import (
+	"aichat/common/logger"
+	"aichat/controller"
+	_ "aichat/docs"
+
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"web-app/common/logger"
-	"web-app/controller"
-	_ "web-app/docs"
 )
 
-// Setup title 和 version，不然不符合 swagger 标准，不能导入 postman
+// Setup title 和 version 必须填写，不然不符合 swagger 标准，不能导入 postman
 // swag init -g ./router/router.go 指定搜索该文件
-// @title           app API
+// 访问：$baseURL/swagger/index.html
+// @title           AIChat
 // @version         0.0.0
-// @host 127.0.0.1:8080
-// @BasePath /api/dev
-func Setup(mode string) *gin.Engine {
+// @host 127.0.0.1:8081
+// @BasePath /aichat
+func Setup(mode string, baseURL string) *gin.Engine {
 	switch mode {
 	case gin.ReleaseMode:
 		gin.SetMode(gin.ReleaseMode)
@@ -29,15 +31,15 @@ func Setup(mode string) *gin.Engine {
 
 	e := gin.New()
 
-	v1 := e.Group("/api/v1")
+	baseUrl := e.Group(baseURL)
 
 	// 日志和 recovery 中间件
-	v1.Use(logger.GinLogger(), logger.GinRecovery(true))
+	baseUrl.Use(logger.GinLogger(), logger.GinRecovery(true))
 	// 设置 header 中间件
-	v1.Use(controller.CrosHandler())
+	baseUrl.Use(controller.CorsHandler())
 
-	registerSwagger(v1)
-	registerExample(v1)
+	registerSwagger(baseUrl)
+	registerExample(baseUrl)
 
 	return e
 }

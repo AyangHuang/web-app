@@ -1,8 +1,8 @@
 package config
 
 type AppConfig struct {
-	Name string `mapstructure:"name"`
-	Mode string `mapstructure:"mode"`
+	Mode    string `mapstructure:"mode"`
 	Address string `mapstructure:"address"`
-	Version string `mapstructure:"version"`
+	Port    int    `mapstructure:"port"`
+	BaseURL string `mapstructure:"baseURL"`
 }
